@@ -4,12 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class Product extends Page {
-    public Product(WebDriver driver){
+    public Product(WebDriver driver) {
         super(driver);
     }
 
-   private static final By productTitle=By.xpath("//span[@data-test='title']");
-    public boolean isDisplayed(){
+    //locators
+    private static final By productTitle = By.xpath("//span[@data-test='title']");
+
+    //Actions
+    public boolean isPageTitleDisplayed() {
         return driver.findElement(productTitle).isDisplayed();
 
     }

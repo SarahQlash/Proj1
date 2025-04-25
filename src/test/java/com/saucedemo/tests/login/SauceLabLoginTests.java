@@ -3,7 +3,6 @@ package com.saucedemo.tests.login;
 import com.saucedemo.Login;
 import com.saucedemo.Product;
 import com.saucedemo.tests.TestCases;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -14,15 +13,24 @@ public class SauceLabLoginTests extends TestCases {
         // Create an instance of the Login page
         Login loginPage = new Login(driver);
         loginPage.navigateToLoginPage();
-        String validUsername= "standard_user";
-        String validPassword="secret_sauce";
-        loginPage.login(validUsername,validPassword);
-        // Add assertions to verify successful login
+
+        String validUsername = "standard_user";
+        String validPassword = "secret_sauce";
+        // Perform login with valid credentials
+        loginPage.login(validUsername, validPassword);
+        // Verify that the user is redirected to the product page
         Product product = new Product(driver);
-        product.isDisplayed();
+        var isDisplayed = product.isPageTitleDisplayed();
         // Add assertions to verify successful navigation to the product page
-        Assert.assertTrue(product.isDisplayed(), "Product page is not displayed after login");
+        Assert.assertTrue(isDisplayed, "Product page is not displayed after login");
+    }
 
-
+    @Test
+    public void fluentLoginTest() {
+        var isDisplayed = new Login(driver)
+                .navigateToLoginPage()
+                .login("standard_user", "secret_sauce")
+                .isPageTitleDisplayed();
+        Assert.assertTrue(isDisplayed, "Page title is not displayed after login");
     }
 }

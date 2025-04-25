@@ -15,13 +15,16 @@ public class Login extends Page {
     
 
     // Actions
-    public void navigateToLoginPage() {
+    public Login navigateToLoginPage() {
         driver.navigate().to("https://www.saucedemo.com/");
+        return this;
     }
-    public void login (String username, String password) {
+
+    public Product login (String username, String password) {
         driver.findElement(usernameInput).sendKeys(username);
         driver.findElement(passwordInput).sendKeys(password);
         driver.findElement(loginButton).click();
+        return new Product(driver);
     }
 
 
